@@ -1,0 +1,13 @@
+{
+  "name": "brocode",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/unit/",
+    "test:e2e": "node --test --test-concurrency=1 test/e2e/",
+    "icons": "node scripts/make-icons.js"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}

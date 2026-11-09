@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>basic</title>
+<style>body{margin:0;font:14px sans-serif} video{display:block;width:640px;height:360px;background:#000} .tall{height:3000px}</style>
+</head>
+<body>
+<video id="v" controls preload="auto"></video>
+<input id="text" type="text" placeholder="type here">
+<div class="tall">long content</div>
+<script>
+  const sec = new URLSearchParams(location.search).get('sec') || '600';
+  document.getElementById('v').src = '/media/silence.wav?sec=' + sec;
+  window.siteKeys = [];
+  document.addEventListener('keydown', (e) => {
+    window.siteKeys.push(e.key);
+    if (e.key === 'ArrowRight') document.getElementById('v').currentTime += 5;
+  });
+</script>
+</body>
+</html>

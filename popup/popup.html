@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BroCode</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <img src="../icons/icon48.png" alt="" width="28" height="28">
+    <div class="brand">
+      <h1 data-i18n="brandName">BroCode</h1>
+      <p id="host" class="host"></p>
+    </div>
+    <span id="saved" class="saved" data-i18n="popupSaved"></span>
+  </header>
+
+  <section id="siteSection" class="card">
+    <h2 data-i18n="popupThisSite"></h2>
+    <p id="unsupported" class="note" data-i18n="popupUnsupported" hidden></p>
+    <div id="siteControls">
+      <label class="toggle">
+        <span class="text">
+          <span class="label" data-i18n="popupHotkeys"></span>
+          <span class="hint" data-i18n="popupHotkeysHint"></span>
+        </span>
+        <input type="checkbox" id="hotkeys" role="switch">
+        <span class="switch" aria-hidden="true"></span>
+      </label>
+      <label class="toggle">
+        <span class="text">
+          <span class="label" data-i18n="popupUiClean"></span>
+          <span class="hint" data-i18n="popupUiCleanHint"></span>
+        </span>
+        <input type="checkbox" id="uiClean" role="switch">
+        <span class="switch" aria-hidden="true"></span>
+      </label>
+      <p id="detected" class="detected"></p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="popupStep"></h2>
+    <div class="modes" role="radiogroup">
+      <label class="mode">
+        <input type="radio" name="mode" value="1">
+        <span class="mode-body">
+          <span class="label" data-i18n="mode1Title"></span>
+          <span class="hint" data-i18n="mode1Desc"></span>
+        </span>
+      </label>
+      <label class="mode">
+        <input type="radio" name="mode" value="2">
+        <span class="mode-body">
+          <span class="label" data-i18n="mode2Title"></span>
+          <span class="hint" data-i18n="mode2Desc"></span>
+        </span>
+      </label>
+      <label class="mode">
+        <input type="radio" name="mode" value="3">
+        <span class="mode-body">
+          <span class="label" data-i18n="mode3Title"></span>
+          <span class="hint" data-i18n="mode3Desc"></span>
+        </span>
+      </label>
+    </div>
+    <div id="custom" class="custom" hidden>
+      <label class="num">
+        <span data-i18n="customBack"></span>
+        <input type="number" id="back" min="1" max="600" step="1" inputmode="numeric">
+        <span class="unit" data-i18n="unitSec"></span>
+      </label>
+      <label class="num">
+        <span data-i18n="customForward"></span>
+        <input type="number" id="fwd" min="1" max="600" step="1" inputmode="numeric">
+        <span class="unit" data-i18n="unitSec"></span>
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <label class="num row">
+      <span class="label" data-i18n="popupVolume"></span>
+      <span class="num-wrap">
+        <input type="number" id="volumeStep" min="1" max="25" step="1" inputmode="numeric">
+        <span class="unit">%</span>
+      </span>
+    </label>
+  </section>
+
+  <p class="footnote" data-i18n="popupOtherKeys"></p>
+
+  <script src="../src/shared/defaults.js"></script>
+  <script src="../src/shared/settings.js"></script>
+  <script src="../src/shared/host.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

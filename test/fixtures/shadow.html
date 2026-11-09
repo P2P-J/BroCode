@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>shadow</title></head>
+<body>
+<x-player></x-player>
+<script>
+  let inner = null;
+  customElements.define('x-player', class extends HTMLElement {
+    constructor() {
+      super();
+      const root = this.attachShadow({ mode: 'closed' });
+      root.innerHTML = '<style>video{width:640px;height:360px;background:#000}</style><video preload="auto" src="/media/silence.wav?sec=600"></video>';
+      inner = root.querySelector('video');
+    }
+  });
+  window.__video = () => inner;
+</script>
+</body>
+</html>

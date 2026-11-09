@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>antiskip</title>
+<style>video{width:640px;height:360px;background:#000}</style>
+</head>
+<body>
+<video id="v" preload="auto" src="/media/silence.wav?sec=600"></video>
+<script>
+  const v = document.getElementById('v');
+  let maxWatched = 0;
+  window.reverts = 0;
+  v.addEventListener('timeupdate', () => { if (!v.seeking) maxWatched = Math.max(maxWatched, v.currentTime); });
+  v.addEventListener('seeking', () => {
+    if (v.currentTime > maxWatched + 1) {
+      window.reverts++;
+      v.currentTime = maxWatched;
+    }
+  });
+</script>
+</body>
+</html>

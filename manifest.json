@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_brandName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "__MSG_brandName__",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_start",
+      "js": [
+        "src/shared/defaults.js",
+        "src/shared/settings.js",
+        "src/shared/step.js",
+        "src/shared/host.js",
+        "src/content/config/players.js",
+        "src/content/config/sites.js",
+        "src/content/core/keys.js",
+        "src/content/core/watch.js",
+        "src/content/core/video-finder.js",
+        "src/content/core/active-video.js",
+        "src/content/core/controller.js",
+        "src/content/core/seek-guard.js",
+        "src/content/core/osd.js",
+        "src/content/core/frame-bridge.js",
+        "src/content/features/hotkeys.js",
+        "src/content/features/ui-clean.js",
+        "src/content/main.js"
+      ]
+    },
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"],
+      "all_frames": true,
+      "run_at": "document_start",
+      "world": "MAIN",
+      "js": ["src/main-world/youtube.js"]
+    }
+  ]
+}

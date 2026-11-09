@@ -1,0 +1,52 @@
+{
+  "brandName": { "message": "강호의도리" },
+  "extName": {
+    "message": "강호의도리 (동영상 건너뛰기 · 방향키 10초 이동 · 재생바 그라데이션 제거 · 볼륨 단축키)"
+  },
+  "extDescription": {
+    "message": "어떤 동영상 사이트에서도 방향키로 건너뛰기·되감기, 위아래로 볼륨, 스페이스바로 재생/정지. 재생바 그라데이션과 hover 컨트롤을 없앱니다."
+  },
+  "popupThisSite": { "message": "이 사이트에서" },
+  "popupHotkeys": { "message": "단축키 강제" },
+  "popupHotkeysHint": {
+    "message": "← → 건너뛰기 · ↑ ↓ 볼륨 · Space 재생/정지"
+  },
+  "popupUiClean": { "message": "플레이어 UI 효과 제거" },
+  "popupUiCleanHint": { "message": "그라데이션, hover 컨트롤바, 썸네일, 툴팁" },
+  "popupUnsupported": {
+    "message": "이 페이지에서는 강호의도리를 사용할 수 없습니다."
+  },
+  "popupDetected": {
+    "message": "감지: $PLAYERS$ · 영상 $COUNT$개",
+    "placeholders": {
+      "players": { "content": "$1" },
+      "count": { "content": "$2" }
+    }
+  },
+  "popupNoVideo": { "message": "아직 감지된 영상이 없습니다" },
+  "popupGenericPlayer": { "message": "HTML5 영상" },
+  "popupStep": { "message": "건너뛰기 간격" },
+  "mode1Title": { "message": "자동" },
+  "mode1Desc": {
+    "message": "영상 길이 기준: 20분 미만 10초 · 1시간 미만 15초 · 그 이상 30초"
+  },
+  "mode2Title": { "message": "고정" },
+  "mode2Desc": { "message": "항상 15초" },
+  "mode3Title": { "message": "직접 지정" },
+  "mode3Desc": { "message": "원하는 값으로 설정" },
+  "customForward": { "message": "앞으로 →" },
+  "customBack": { "message": "← 뒤로" },
+  "unitSec": { "message": "초" },
+  "popupVolume": { "message": "볼륨 단계" },
+  "popupSaved": { "message": "저장됨" },
+  "popupOtherKeys": {
+    "message": "그 외 키(M, C, F 등)는 사이트 기본 동작 그대로 쓸 수 있습니다."
+  },
+  "osdVolume": {
+    "message": "볼륨 $PCT$%",
+    "placeholders": { "pct": { "content": "$1" } }
+  },
+  "osdMuted": { "message": "음소거" },
+  "osdBlocked": { "message": "이 플레이어가 이동을 막고 있습니다" },
+  "osdPlayBlocked": { "message": "브라우저가 재생을 막았습니다" }
+}

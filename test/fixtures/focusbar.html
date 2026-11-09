@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>focusbar</title>
+<style>
+  .player{position:relative;width:640px;height:360px}
+  video{width:100%;height:100%;background:#000}
+  .overlay{position:absolute;inset:0 0 40px 0}
+  .bar{position:absolute;left:0;right:0;bottom:0;height:40px;background:#333}
+</style>
+</head>
+<body>
+<div class="player">
+  <video id="v" preload="auto" src="/media/silence.wav?sec=600"></video>
+  <div class="overlay" id="overlay" tabindex="-1"></div>
+  <div class="bar" id="bar" tabindex="0"></div>
+</div>
+<script>
+  const v = document.getElementById('v');
+  document.getElementById('overlay').addEventListener('keydown', (e) => { e.preventDefault(); e.stopPropagation(); });
+  document.getElementById('bar').addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') v.currentTime += 5;
+    if (e.key === 'ArrowLeft') v.currentTime -= 5;
+  });
+</script>
+</body>
+</html>

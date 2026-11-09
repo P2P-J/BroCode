@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>presets</title>
+<style>
+  .box{position:relative;width:640px;height:360px;margin-bottom:20px}
+  video{width:100%;height:100%;background:#000;display:block}
+  .plyr__controls{position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+  .plyr__captions{position:absolute;left:0;right:0;bottom:70px;color:#fff}
+  .grad{position:absolute;left:0;right:0;bottom:0;height:120px;background-image:linear-gradient(transparent,#000)}
+  .badge{position:absolute;left:10px;top:10px;width:40px;height:20px;background-image:linear-gradient(red,blue)}
+</style>
+</head>
+<body>
+<div class="box plyr" id="plyr">
+  <video id="v1" preload="auto" src="/media/silence.wav?sec=600"></video>
+  <div class="plyr__captions" id="caps">caption text</div>
+  <div class="plyr__controls" id="ctrls"><button>play</button></div>
+</div>
+<div class="box" id="generic">
+  <video id="v2" preload="auto" src="/media/silence.wav?sec=600"></video>
+  <div class="grad" id="grad"></div>
+  <div class="badge" id="badge"></div>
+</div>
+</body>
+</html>

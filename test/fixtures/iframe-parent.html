@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>iframe parent</title>
+<style>iframe{width:700px;height:420px;border:0} .tall{height:2000px}</style>
+</head>
+<body>
+<p id="outside">Click here, outside the iframe</p>
+<iframe id="f" allow="autoplay"></iframe>
+<div class="tall"></div>
+<script>
+  document.getElementById('f').src = new URLSearchParams(location.search).get('src');
+</script>
+</body>
+</html>

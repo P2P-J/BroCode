@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BroCode promo</title>
+<style>
+@font-face { font-family: P; src: url(fonts/Pretendard-Regular.woff2); font-weight: 400; }
+@font-face { font-family: P; src: url(fonts/Pretendard-Medium.woff2); font-weight: 500; }
+@font-face { font-family: P; src: url(fonts/Pretendard-SemiBold.woff2); font-weight: 600; }
+@font-face { font-family: P; src: url(fonts/Pretendard-Bold.woff2); font-weight: 700; }
+@font-face { font-family: P; src: url(fonts/Pretendard-ExtraBold.woff2); font-weight: 800; }
+@font-face { font-family: P; src: url(fonts/Pretendard-Black.woff2); font-weight: 900; }
+@font-face { font-family: M; src: url(fonts/JetBrainsMono-Regular.ttf); font-weight: 400; }
+@font-face { font-family: M; src: url(fonts/JetBrainsMono-Bold.ttf); font-weight: 700; }
+@font-face { font-family: S; src: url(fonts/SerifKR-Black.woff2); font-weight: 900; }
+
+:root {
+  --ink: #0d0c11;
+  --ink2: #15141b;
+  --bone: #efece4;
+  --text: #ecebf2;
+  --muted: #8d8b9b;
+  --dim: #55535f;
+  --line: rgba(255,255,255,.08);
+  --violet: #7b6cff;
+  --violet-deep: #5b4bdb;
+  --seal: #c8372d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--ink); }
+body { font-family: P, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+
+.canvas { position: relative; overflow: hidden; background:
+  radial-gradient(120% 90% at 85% 40%, rgba(91,75,219,.16), transparent 55%),
+  radial-gradient(80% 70% at 0% 100%, rgba(200,55,45,.05), transparent 60%),
+  linear-gradient(180deg, #111017, #0b0a0f); }
+.canvas::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+.dots { position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.4px); background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(60% 70% at 75% 50%, #000 0%, transparent 75%); }
+
+.abs { position: absolute; }
+.eyebrow { display: flex; align-items: center; gap: 14px; }
+.eyebrow img { width: 46px; height: 46px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+.eyebrow .name { font-weight: 800; font-size: 22px; letter-spacing: -.01em; }
+.eyebrow .kind { font-family: M; font-size: 12px; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; margin-top: 3px; }
+
+h1 { font-weight: 800; font-size: 66px; line-height: 1.14; letter-spacing: -.035em; white-space: pre-line; }
+h1 em { font-style: normal; color: var(--violet); }
+.sub { word-break: keep-all; font-size: 21px; line-height: 1.6; color: var(--muted); font-weight: 500; letter-spacing: -.01em; }
+.sub b { color: var(--text); font-weight: 600; }
+.lang-en h1 { letter-spacing: -.03em; }
+
+.meta { font-family: M; font-size: 12px; letter-spacing: .16em; color: var(--dim); text-transform: uppercase; }
+.rule { height: 1px; background: var(--line); }
+
+.seal { width: 64px; height: 64px; background: var(--seal); border-radius: 6px; display: grid; place-items: center; transform: rotate(-4deg);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.0), inset 0 0 12px rgba(0,0,0,.25); position: relative; }
+.seal::before { content: ""; position: absolute; inset: 5px; border: 1.5px solid rgba(255,240,230,.85); border-radius: 3px; }
+.seal span { font-family: S; font-weight: 900; color: #fff4ec; font-size: 21px; line-height: 1.02; writing-mode: vertical-rl; letter-spacing: .02em; }
+
+.key { position: relative; display: grid; place-items: center; border-radius: 20px; color: #dcdbe6;
+  background: linear-gradient(180deg, #2c2b37 0%, #1f1e28 55%, #1a1922 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.09), inset 0 -7px 0 rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.05), 0 18px 34px rgba(0,0,0,.55); }
+.key::before { content: ""; position: absolute; inset: 7px 9px 15px; border-radius: 13px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,0)); }
+.key svg { position: relative; margin-top: -6px; }
+.key .t { position: relative; margin-top: -6px; font-family: M; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.key.on { color: #fff; transform: translateY(5px);
+  background: linear-gradient(180deg, #9384ff 0%, #6e5ef0 50%, #5b4bdb 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.4), inset 0 -4px 0 rgba(36,22,130,.5), 0 0 0 1px rgba(255,255,255,.1), 0 10px 46px rgba(110,94,240,.55); }
+.key.on::before { background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0)); }
+.key.soft { color: #cfcce8; background: linear-gradient(180deg, #2a283a, #1e1c2a); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.07), inset 0 -6px 0 rgba(0,0,0,.35), 0 0 0 1px rgba(146,132,255,.28), 0 14px 26px rgba(0,0,0,.5); }
+.key.dim { color: #44434e; background: linear-gradient(180deg, #19181f, #141319); box-shadow: inset 0 1px 0 rgba(255,255,255,.035), inset 0 -5px 0 rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03), 0 8px 16px rgba(0,0,0,.4); }
+.key.dim::before { display: none; }
+
+.klabel { font-family: M; font-size: 13px; letter-spacing: .06em; color: var(--muted); text-align: center; white-space: nowrap; }
+.klabel b { color: var(--text); font-weight: 700; }
+
+.frame { position: absolute; border-radius: 18px; overflow: hidden; background: #000;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px rgba(0,0,0,.6), 0 12px 24px rgba(0,0,0,.4); }
+.frame > svg { display: block; width: 100%; height: 100%; }
+.sub-cap { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #fff; font-weight: 600;
+  background: rgba(8,8,12,.62); padding: 6px 14px; border-radius: 6px; letter-spacing: -.01em; }
+
+.osd { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 14px 26px; border-radius: 16px;
+  background: rgba(10,10,14,.58); backdrop-filter: blur(10px); color: #fff; font-family: M; font-weight: 700; font-size: 40px; letter-spacing: .02em;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 18px 40px rgba(0,0,0,.4); display: flex; align-items: center; gap: 12px; }
+
+.chip { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: 16px; color: #d9d7e6;
+  background: rgba(255,255,255,.035); box-shadow: inset 0 0 0 1px rgba(255,255,255,.09); white-space: nowrap; }
+.chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px var(--violet); }
+.chip.code { font-family: M; font-weight: 700; font-size: 15px; color: #fff; background: rgba(123,108,255,.14); box-shadow: inset 0 0 0 1px rgba(146,132,255,.5); }
+
+.tag { font-family: M; font-weight: 700; font-size: 12px; letter-spacing: .2em; padding: 7px 12px; border-radius: 6px; }
+
+.pop { width: 340px; padding: 12px; background: #131317; border-radius: 14px; font-size: 13px; line-height: 1.4; color: #ececf1;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.09), 0 40px 90px rgba(0,0,0,.65); transform-origin: top left; }
+.pop .top { display: flex; align-items: center; gap: 10px; padding: 2px 4px 10px; }
+.pop .top img { width: 28px; height: 28px; }
+.pop h3 { font-size: 15px; font-weight: 700; }
+.pop .host { color: #9a9aa6; font-size: 12px; }
+.pop .saved { margin-left: auto; color: #4ad08a; font-size: 12px; font-weight: 600; }
+.pop .card { background: #1d1d23; border: 1px solid #2c2c35; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+.pop h4 { color: #9a9aa6; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; }
+.pop .tg { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+.pop .tg .tx { flex: 1; display: flex; flex-direction: column; }
+.pop .lb { font-weight: 600; }
+.pop .hn { word-break: keep-all; color: #9a9aa6; font-size: 11.5px; }
+.pop .sw { width: 34px; height: 20px; border-radius: 999px; background: #8f82ff; position: relative; flex: none; }
+.pop .sw::after { content: ""; position: absolute; top: 2px; left: 16px; width: 16px; height: 16px; border-radius: 50%; background: #131317; }
+.pop .det { color: #9a9aa6; font-size: 11.5px; padding-top: 4px; }
+.pop .md { display: flex; gap: 10px; padding: 7px 8px; border-radius: 9px; align-items: flex-start; }
+.pop .md.sel { background: rgba(143,130,255,.12); box-shadow: inset 0 0 0 1px rgba(143,130,255,.45); }
+.pop .rd { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #5d5d6a; flex: none; margin-top: 1px; }
+.pop .md.sel .rd { border: 5px solid #8f82ff; }
+.pop .md > div { display: flex; flex-direction: column; }
+.pop .row { display: flex; align-items: center; justify-content: space-between; }
+.pop .nb { display: inline-flex; align-items: center; gap: 6px; }
+.pop .nb span:first-child { width: 52px; height: 28px; border-radius: 8px; background: #131317; border: 1px solid #2c2c35; display: grid; place-items: center; font-family: M; }
+.pop .foot { color: #9a9aa6; font-size: 11.5px; padding: 2px 4px; }
+
+.rulecard { padding: 16px 20px; border-radius: 16px; background: rgba(255,255,255,.025); box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.rulecard .ic { font-family: M; font-size: 13px; font-weight: 700; color: var(--violet); letter-spacing: .1em; margin-bottom: 10px; }
+.rulecard p { word-break: keep-all; font-size: 16px; line-height: 1.5; font-weight: 500; color: #d6d4e2; letter-spacing: -.01em; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const S = q.get('s') || 'hero';
+const L = q.get('lang') || 'ko';
+const T = (ko, en) => (L === 'ko' ? ko : en);
+const BRAND = T('강호의도리', 'BroCode');
+const ICON = '../../icons/icon128.png';
+
+const arrow = (dir, size = 40, sw = 5) => {
+  const r = { up: 0, right: 90, down: 180, left: 270 }[dir];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 40 40" style="transform:rotate(${r}deg)"><path d="M20 33V8M9 18.5 20 7.5l11 11" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+};
+const key = (inner, w, h, cls = '', fs = 0) =>
+  `<div class="key ${cls}" style="width:${w}px;height:${h}px;border-radius:${Math.round(h * 0.18)}px">${typeof inner === 'string' && inner.startsWith('<svg') ? inner : `<span class="t" style="font-size:${fs || Math.round(h * 0.2)}px">${inner}</span>`}</div>`;
+
+const rnd = (seed) => () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const ridge = (base, amp, seed, W = 1600, H = 900) => {
+  const r = rnd(seed);
+  const ph = [r() * 6, r() * 6, r() * 6, r() * 6];
+  const fr = [0.0022 + r() * 0.001, 0.006 + r() * 0.003, 0.016 + r() * 0.006, 0.04 + r() * 0.02];
+  const am = [1, 0.45, 0.18, 0.06];
+  let d = `M0 ${H}`;
+  for (let x = 0; x <= W; x += 8) {
+    let y = 0;
+    for (let i = 0; i < 4; i++) y += Math.sin(x * fr[i] + ph[i]) * am[i];
+    d += ` L${x} ${(base - y * amp).toFixed(1)}`;
+  }
+  return d + ` L${W} ${H} Z`;
+};
+
+const scene = (id = 'a', opts = {}) => {
+  const layers = [
+    { b: 430, a: 70, s: 11, c: '#8d96b3', o: 0.55 },
+    { b: 500, a: 95, s: 23, c: '#5b6688', o: 0.75 },
+    { b: 590, a: 85, s: 37, c: '#323a57', o: 0.92 },
+    { b: 690, a: 110, s: 51, c: '#181c2c', o: 1 },
+  ];
+  const mist = (y, h, o) => `<rect x="0" y="${y}" width="1600" height="${h}" fill="url(#mist${id})" opacity="${o}"/>`;
+  return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a2038"/><stop offset=".45" stop-color="#3f4a72"/><stop offset=".72" stop-color="#9c8fa6"/><stop offset="1" stop-color="#e7c3a2"/>
+    </linearGradient>
+    <linearGradient id="mist${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9ddd6" stop-opacity="0"/><stop offset=".55" stop-color="#e9ddd6" stop-opacity=".5"/><stop offset="1" stop-color="#e9ddd6" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="moon${id}"><stop offset="0" stop-color="#fff3df" stop-opacity=".55"/><stop offset="1" stop-color="#fff3df" stop-opacity="0"/></radialGradient>
+    <linearGradient id="water${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2f47"/><stop offset="1" stop-color="#0c0e17"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky${id})"/>
+  <circle cx="1240" cy="230" r="190" fill="url(#moon${id})"/>
+  <circle cx="1240" cy="230" r="62" fill="#f7ecd9"/>
+  <g fill="none" stroke="#151826" stroke-width="3.2" stroke-linecap="round" opacity=".75">
+    <path d="M430 220q11-9 20 0q9-9 20 0"/><path d="M492 196q8-6 14 0q7-6 14 0"/><path d="M398 182q7-5 12 0q6-5 12 0"/>
+  </g>
+  ${layers.map((l, i) => `<path d="${ridge(l.b, l.a, l.s)}" fill="${l.c}" opacity="${l.o}"/>${i < 3 ? mist(l.b - 40 + i * 12, 150, 0.55 - i * 0.12) : ''}`).join('')}
+  <rect x="0" y="770" width="1600" height="130" fill="url(#water${id})"/>
+  <g fill="#f7ecd9" opacity=".5"><rect x="1200" y="790" width="80" height="2.5" rx="1"/><rect x="1215" y="806" width="50" height="2" rx="1"/><rect x="1224" y="820" width="32" height="2" rx="1"/></g>
+  <g transform="translate(560 772)" fill="#0b0d15">
+    <path d="M-46 0 Q0 16 52 0 L40 10 Q0 18 -34 10Z"/><rect x="-2" y="-30" width="3" height="32"/>
+    <path d="M-8 -24 L4 -24 L2 -6 L-6 -6Z"/><path d="M-14 -24 L-2 -36 L10 -24Z"/>
+  </g>
+  </svg>`;
+};
+
+const playerChrome = (w) => `
+  <div class="abs" style="left:0;right:0;top:0;height:30%;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0))"></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:46%;background:linear-gradient(0deg,rgba(0,0,0,.92),rgba(0,0,0,.55) 45%,rgba(0,0,0,0))"></div>
+  <div class="abs" style="left:22px;top:18px;font-weight:600;font-size:16px;color:#fff">${T('제7화 · 산을 내려온 객', 'Ep. 07 · The Stranger from the Mountain')}</div>
+  <div class="abs" style="left:22px;right:22px;bottom:52px;height:5px;border-radius:3px;background:rgba(255,255,255,.28)">
+    <div style="width:31%;height:100%;border-radius:3px;background:#e9e9ee"></div>
+    <div style="position:absolute;left:31%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff"></div>
+  </div>
+  <div class="abs" style="left:calc(22px + 44%);bottom:70px;width:${Math.round(w * 0.2)}px;transform:translateX(-50%)">
+    <div style="border-radius:6px;overflow:hidden;box-shadow:0 0 0 2px #fff;aspect-ratio:16/9">${scene('t')}</div>
+    <div style="margin-top:6px;text-align:center;font-family:M;font-size:13px;color:#fff">18:05</div>
+  </div>
+  <div class="abs" style="left:22px;right:22px;bottom:14px;height:28px;display:flex;align-items:center;gap:20px;color:#fff">
+    <svg width="18" height="20" viewBox="0 0 18 20"><path d="M2 1.5 16 10 2 18.5Z" fill="#fff"/></svg>
+    <svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 2 12 9 2 16Z" fill="#fff"/><rect x="13" y="2" width="3" height="14" fill="#fff"/></svg>
+    <svg width="22" height="18" viewBox="0 0 22 18"><path d="M1 6h4l6-5v16l-6-5H1Z" fill="#fff"/><path d="M15 5q3 4 0 8M18 2q6 7 0 14" stroke="#fff" stroke-width="2" fill="none"/></svg>
+    <span style="font-family:M;font-size:14px">12:48 / 41:20</span>
+    <span style="flex:1"></span>
+    <span style="font-family:M;font-size:12px;font-weight:700;border:2px solid #fff;border-radius:4px;padding:0 4px">CC</span>
+    <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3.2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="10" cy="10" r="7.5" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3.2 2.6"/></svg>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2.2"><path d="M2 7V2h5M13 2h5v5M18 13v5h-5M7 18H2v-5"/></svg>
+  </div>`;
+
+const eyebrow = (sz = 46) => `<div class="eyebrow"><img src="${ICON}" style="width:${sz}px;height:${sz}px"><div><div class="name">${BRAND}</div><div class="kind">${T('Chrome 확장 프로그램', 'Chrome extension')}</div></div></div>`;
+const seal = (s = 64) => `<div class="seal" style="width:${s}px;height:${s}px"><span style="font-size:${Math.round(s * 0.33)}px">道理</span></div>`;
+
+const footer = (n) => `
+  <div class="abs" style="left:72px;right:72px;bottom:44px;display:flex;align-items:center;gap:18px">
+    <div class="meta">${String(n).padStart(2, '0')} / 05</div><div class="rule" style="flex:1"></div><div class="meta">${BRAND} · ${T('강호에는 강호의 도리가 있는 법', 'A code for every player')}</div>
+  </div>`;
+
+const slides = {};
+
+slides.hero = () => {
+  const K = 112, G = 16;
+  const cx = 870, top = 150;
+  const rowW = K * 3 + G * 2;
+  const x0 = cx - rowW / 2;
+  return `<div class="canvas" style="width:1280px;height:800px">
+  <div class="dots"></div>
+  <div class="abs" style="left:72px;top:64px">${eyebrow()}</div>
+  <div class="abs" style="left:72px;top:212px;width:560px">
+    <h1>${T('어느 사이트든,\n방향키는 <em>똑같이.</em>', 'Same keys.\n<em>Every</em> video site.')}</h1>
+    <p class="sub" style="margin-top:28px;width:470px">${T('건너뛰기, 볼륨, 재생을 키보드 하나로.<br>재생바의 검은 그라데이션도 걷어냅니다.', 'Skip, volume and play/pause from the keyboard on any player. The dark gradient over the seek bar goes too.')}</p>
+  </div>
+  <div class="abs" style="left:72px;top:600px">${seal(60)}</div>
+
+  <div class="abs" style="left:${x0 + K + G}px;top:${top}px">${key(arrow('up', 38), K, K)}</div>
+  <div class="abs klabel" style="left:${x0 + K + G}px;width:${K}px;top:${top - 34}px"><b>${T('볼륨', 'VOL')}</b> +5%</div>
+  ${['left', 'down', 'right'].map((d, i) => `<div class="abs" style="left:${x0 + i * (K + G)}px;top:${top + K + G}px">${key(arrow(d, 38), K, K, d === 'right' ? 'on' : '')}</div>`).join('')}
+  ${[[T('뒤로', 'BACK'), '10s'], [T('볼륨', 'VOL'), '−5%'], [T('앞으로', 'FWD'), '10s']].map(([a, b], i) => `<div class="abs klabel" style="left:${x0 + i * (K + G)}px;width:${K}px;top:${top + 2 * K + G + 18}px"><b>${a}</b> ${b}</div>`).join('')}
+  <div class="abs" style="left:${x0}px;top:${top + 2 * K + G + 72}px">${key('space', rowW, 88, '', 18)}</div>
+  <div class="abs klabel" style="left:${x0}px;width:${rowW}px;top:${top + 2 * K + G + 72 + 88 + 18}px"><b>${T('재생', 'PLAY')}</b> / ${T('정지', 'PAUSE')}</div>
+  <div class="abs osd" style="left:${x0 + rowW + 92}px;top:${top + K + G + K / 2 + 5}px;font-size:30px;padding:12px 20px">+10s</div>
+  ${footer(1)}
+  </div>`;
+};
+
+slides.anywhere = () => `<div class="canvas" style="width:1280px;height:800px">
+  <div class="abs" style="left:72px;top:64px">${eyebrow(40)}</div>
+  <div class="abs" style="left:72px;top:170px;width:470px">
+    <h1 style="font-size:56px">${T('플레이어가 달라도\n손은 <em>그대로.</em>', 'New player.\n<em>Same</em> hands.')}</h1>
+    <p class="sub" style="margin-top:26px;font-size:19px">${T('사이트가 아니라 영상 요소를 직접 다룹니다. 처음 가 보는 사이트에서도, 블로그에 임베드된 영상에서도 같은 키가 통합니다.', 'BroCode talks to the video element itself, not to the site. The same keys work on sites it has never seen, and on videos embedded in someone else\'s page.')}</p>
+  </div>
+  <div class="frame" style="left:600px;top:110px;width:608px;height:342px">${scene('a')}
+    <div class="osd" style="font-size:34px">${arrow('right', 30, 5)}+10s</div>
+    <div class="sub-cap" style="bottom:22px;font-size:16px">${T('강호에는 강호의 도리가 있는 법이지.', 'Every road has its own code.')}</div>
+  </div>
+  <div class="abs" style="left:600px;top:492px;width:608px">
+    <div class="meta" style="margin-bottom:16px">${T('UI 정리 프리셋 내장', 'Built-in player presets')}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      ${['YouTube', 'Video.js', 'JW Player', 'Plyr', 'Shaka Player', 'MediaElement.js', 'Flowplayer'].map((n) => `<span class="chip"><i></i>${n}</span>`).join('')}
+      <span class="chip code">+ ${T('모든', 'any')} &lt;video&gt;</span>
+    </div>
+  </div>
+  ${footer(2)}
+</div>`;
+
+slides.clean = () => {
+  const W = 548, H = 308;
+  const cap = (b) => `<div class="sub-cap" style="bottom:${b}px;font-size:15px">${T('강호에는 강호의 도리가 있는 법이지.', 'Every road has its own code.')}</div>`;
+  return `<div class="canvas" style="width:1280px;height:800px">
+  <div class="abs" style="left:72px;top:64px">${eyebrow(40)}</div>
+  <div class="abs" style="left:72px;top:150px;width:1136px;display:flex;justify-content:space-between;align-items:flex-end">
+    <h1 style="font-size:54px">${T('영상을 가리던 것들,\n<em>걷어냈습니다.</em>', 'Nothing between you\nand <em>the picture.</em>')}</h1>
+    <p class="sub" style="width:420px;font-size:18px;padding-bottom:8px">${T('재생바 뒤 그라데이션, 마우스만 올리면 뜨는 컨트롤바·썸네일·툴팁을 숨깁니다. <b>자막은 그대로 둡니다.</b>', 'Hides the gradient behind the seek bar and the controls, thumbnails and tooltips that pop up on hover. <b>Subtitles stay.</b>')}</p>
+  </div>
+  <div class="frame" style="left:72px;top:350px;width:${W}px;height:${H}px">${scene('b')}${playerChrome(W)}${cap(156)}</div>
+  <div class="frame" style="left:${72 + W + 40}px;top:350px;width:${W}px;height:${H}px;box-shadow:0 0 0 1.5px rgba(146,132,255,.65),0 40px 90px rgba(91,75,219,.25),0 12px 24px rgba(0,0,0,.4)">${scene('c')}${cap(26)}</div>
+  <div class="abs tag" style="left:72px;top:312px;background:rgba(0,0,0,.55);color:#bdbcc8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)">${T('BEFORE · 기존', 'BEFORE')}</div>
+  <div class="abs tag" style="left:${72 + W + 40}px;top:312px;background:var(--violet-deep);color:#fff">${T('AFTER · 강호의도리', 'AFTER · BROCODE')}</div>
+  <div class="abs" style="left:${72 + W + 4}px;top:${350 + H / 2 - 16}px;width:32px;height:32px;border-radius:50%;background:#1d1c25;display:grid;place-items:center;color:var(--violet);box-shadow:0 0 0 1px rgba(255,255,255,.1)">${arrow('right', 18, 4)}</div>
+  ${footer(3)}
+</div>`;
+};
+
+slides.interval = () => {
+  const rows = [
+    { len: T('20분 미만', 'Under 20 min'), w: 0.18, s: '10', ticks: 6 },
+    { len: T('20 – 60분', '20 – 60 min'), w: 0.52, s: '15', ticks: 12 },
+    { len: T('60분 이상', 'Over 60 min'), w: 1, s: '30', ticks: 16 },
+  ];
+  const BW = 420;
+  return `<div class="canvas" style="width:1280px;height:800px">
+  <div class="abs" style="left:72px;top:64px">${eyebrow(40)}</div>
+  <div class="abs" style="left:72px;top:160px;width:620px">
+    <h1 style="font-size:56px">${T('긴 영상은\n<em>더 멀리</em> 건너뜁니다.', 'Longer video,\n<em>longer</em> jumps.')}</h1>
+    <p class="sub" style="margin-top:24px;font-size:19px;width:560px">${T('자동 모드는 영상 길이를 보고 간격을 정합니다. 항상 15초로 고정하거나, 앞뒤 간격을 1~600초 사이로 직접 정할 수도 있어요.', 'Auto mode picks the step from the video\'s length. Or lock it at 15 seconds, or set forward and back yourself, anywhere from 1 to 600.')}</p>
+  </div>
+  <div class="abs" style="left:72px;top:470px;width:640px">
+    ${rows.map((r, i) => `
+    <div style="display:flex;align-items:center;gap:22px;height:72px;${i ? 'border-top:1px solid var(--line)' : ''}">
+      <div style="width:120px;font-weight:600;font-size:16px;color:#cfcdd9">${r.len}</div>
+      <div style="width:${BW}px;position:relative;height:10px">
+        <div style="position:absolute;inset:0;border-radius:5px;background:rgba(255,255,255,.05)"></div>
+        <div style="position:absolute;left:0;top:0;bottom:0;width:${r.w * BW}px;border-radius:5px;background:linear-gradient(90deg,#4c3fc0,${i === 2 ? '#9384ff' : '#7b6cff'});box-shadow:0 0 18px rgba(123,108,255,${0.2 + i * 0.12})"></div>
+        ${Array.from({ length: r.ticks - 1 }, (_, k) => `<div style="position:absolute;top:0;bottom:0;width:2px;background:#13121a;left:${((k + 1) / r.ticks) * r.w * BW - 1}px"></div>`).join('')}
+      </div>
+      <div style="font-family:M;font-weight:700;font-size:30px;color:#fff;width:70px;text-align:right">${r.s}<span style="font-size:16px;color:var(--muted);margin-left:2px">s</span></div>
+    </div>`).join('')}
+  </div>
+  <div class="abs" style="left:820px;top:84px"><div class="pop" style="transform:scale(1.14)">
+    <div class="top"><img src="${ICON}"><div><h3>${BRAND}</h3><div class="host">www.example-video.com</div></div><span class="saved">${T('저장됨', 'Saved')}</span></div>
+    <div class="card"><h4>${T('이 사이트에서', 'On this site')}</h4>
+      <div class="tg"><div class="tx"><span class="lb">${T('단축키 강제', 'Force hotkeys')}</span><span class="hn">${T('← → 건너뛰기 · ↑ ↓ 볼륨 · Space 재생/정지', '← → skip · ↑ ↓ volume · Space play/pause')}</span></div><span class="sw"></span></div>
+      <div class="tg"><div class="tx"><span class="lb">${T('플레이어 UI 효과 제거', 'Remove player overlays')}</span><span class="hn">${T('그라데이션, hover 컨트롤바, 썸네일, 툴팁', 'Gradient, hover controls, thumbnails, tooltips')}</span></div><span class="sw"></span></div>
+      <div class="det">${T('감지: Video.js · 영상 1개', 'Detected: Video.js · 1 video(s)')}</div>
+    </div>
+    <div class="card"><h4>${T('건너뛰기 간격', 'Skip interval')}</h4>
+      <div class="md sel"><span class="rd"></span><div><span class="lb">${T('자동', 'Auto')}</span><span class="hn">${T('영상 길이 기준: 20분 미만 10초 · 1시간 미만 15초 · 그 이상 30초', 'By video length: under 20 min 10s · under 1 h 15s · longer 30s')}</span></div></div>
+      <div class="md"><span class="rd"></span><div><span class="lb">${T('고정', 'Fixed')}</span><span class="hn">${T('항상 15초', 'Always 15 seconds')}</span></div></div>
+      <div class="md"><span class="rd"></span><div><span class="lb">${T('직접 지정', 'Custom')}</span><span class="hn">${T('원하는 값으로 설정', 'Set your own values')}</span></div></div>
+    </div>
+    <div class="card row"><span class="lb">${T('볼륨 단계', 'Volume step')}</span><span class="nb"><span>5</span><span class="hn">%</span></span></div>
+    <div class="foot">${T('그 외 키(M, C, F 등)는 사이트 기본 동작 그대로 쓸 수 있습니다.', 'Other keys (M, C, F …) keep working as the site defines them.')}</div>
+  </div></div>
+  ${footer(4)}
+</div>`;
+};
+
+slides.keys = () => {
+  const U = 54, G = 8;
+  const mine = { '←': 'left', '→': 'right', '↑': 'up', '↓': 'down' };
+  const site = { M: 1, C: 1, F: 1, K: 1, J: 1, L: 1 };
+  const rows = [
+    { o: 0, k: 'QWERTYUIOP'.split('') },
+    { o: 0.3, k: 'ASDFGHJKL'.split('') },
+    { o: 0.8, k: 'ZXCVBNM'.split('') },
+  ];
+  const K0x = 72, K0y = 410;
+  let html = '';
+  rows.forEach((r, ri) => r.k.forEach((c, ci) => {
+    const x = K0x + (r.o + ci) * (U + G), y = K0y + ri * (U + G);
+    html += `<div class="abs" style="left:${x}px;top:${y}px">${key(c, U, U, site[c] ? 'soft' : 'dim', 18)}</div>`;
+  }));
+  const sy = K0y + 3 * (U + G);
+  html += `<div class="abs" style="left:${K0x + 2.6 * (U + G)}px;top:${sy}px">${key('space', U * 5 + G * 4, U, 'on', 15)}</div>`;
+  const ax = K0x + 10.4 * (U + G);
+  html += `<div class="abs" style="left:${ax + U + G}px;top:${sy - U - G}px">${key(arrow('up', 24, 4.5), U, U, 'on')}</div>`;
+  ['left', 'down', 'right'].forEach((d, i) => { html += `<div class="abs" style="left:${ax + i * (U + G)}px;top:${sy}px">${key(arrow(d, 24, 4.5), U, U, 'on')}</div>`; });
+  const legendY = K0y - 64;
+  return `<div class="canvas" style="width:1280px;height:800px">
+  <div class="abs" style="left:72px;top:64px">${eyebrow(40)}</div>
+  <div class="abs" style="left:72px;top:150px;width:1136px;display:flex;justify-content:space-between;align-items:flex-end">
+    <h1 style="font-size:54px">${T('필요한 키만 잡고,\n나머지는 <em>사이트에.</em>', 'Takes five keys.\n<em>Leaves</em> the rest.')}</h1>
+  </div>
+  <div class="abs" style="left:72px;top:${legendY}px;display:flex;gap:28px" >
+    <span class="klabel" style="display:flex;align-items:center;gap:10px"><i style="width:12px;height:12px;border-radius:3px;background:var(--violet)"></i><b>${T('강호의도리가 처리', 'BroCode handles')}</b></span>
+    <span class="klabel" style="display:flex;align-items:center;gap:10px"><i style="width:12px;height:12px;border-radius:3px;box-shadow:inset 0 0 0 1.5px rgba(146,132,255,.6)"></i>${T('사이트 단축키 그대로 (M 음소거 · C 자막 · F 전체화면 …)', 'Site shortcuts untouched (M mute · C captions · F fullscreen …)')}</span>
+  </div>
+  ${html}
+  <div class="abs" style="left:956px;top:322px;width:252px;display:flex;flex-direction:column;gap:10px">
+    ${[
+      ['01', T('검색창·댓글창에 입력하는 동안에는 키를 가로채지 않습니다.', 'Stays out of the way while you type in a search or comment box.')],
+      ['02', T('Ctrl · Alt · ⌘ 조합키와 한글 조합 중인 키는 그냥 지나갑니다.', 'Ctrl, Alt and ⌘ combos pass straight through, and so do keys mid-IME composition.')],
+      ['03', T('영상이 화면에 없으면 스페이스바는 평소처럼 스크롤합니다.', 'No video on screen? Space scrolls the page like always.')],
+    ].map(([n, t]) => `<div class="rulecard"><div class="ic">${n}</div><p>${t}</p></div>`).join('')}
+  </div>
+  ${footer(5)}
+</div>`;
+};
+
+slides.marquee = () => {
+  const K = 96, G = 14, rowW = K * 3 + G * 2;
+  const fx = 700, fy = 70, fw = 628, fh = 354;
+  const kx = 1010, ky = 232;
+  return `<div class="canvas" style="width:1400px;height:560px">
+  <div class="dots"></div>
+  <div class="abs" style="left:80px;top:72px">${eyebrow(52)}</div>
+  <div class="abs" style="left:80px;top:184px;width:560px">
+    <h1 style="font-size:64px">${T('어느 사이트든,\n방향키는 <em>똑같이.</em>', 'Same keys.\n<em>Every</em> video site.')}</h1>
+    <p class="sub" style="margin-top:22px;font-size:19px">${T('← → 건너뛰기 · ↑ ↓ 볼륨 · Space 재생/정지<br>그리고 재생바 그라데이션 제거', '← → skip · ↑ ↓ volume · Space play/pause<br>and no more seek-bar gradient')}</p>
+  </div>
+  <div class="frame" style="left:${fx}px;top:${fy}px;width:${fw}px;height:${fh}px">${scene('m')}
+    <div class="osd" style="font-size:30px;top:30%;left:62%">${arrow('right', 28, 5)}+10s</div>
+  </div>
+  <div class="abs" style="left:${kx - rowW - 60}px;top:${ky}px;padding:22px 26px 26px;border-radius:28px;background:rgba(14,13,19,.78);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 70px rgba(0,0,0,.6)">
+    <div style="display:flex;justify-content:center">${key(arrow('up', 32), K, K)}</div>
+    <div style="display:flex;gap:${G}px;margin-top:${G}px">${['left', 'down', 'right'].map((d) => key(arrow(d, 32), K, K, d === 'right' ? 'on' : '')).join('')}</div>
+  </div>
+  <div class="abs" style="left:1240px;top:452px">${seal(56)}</div>
+</div>`;
+};
+
+slides.tile = () => `<div class="canvas" style="width:440px;height:280px;background:radial-gradient(90% 90% at 100% 0%,rgba(91,75,219,.32),transparent 60%),linear-gradient(180deg,#121118,#0b0a0f)">
+  <div class="abs" style="left:28px;top:28px;display:flex;align-items:center;gap:12px"><img src="${ICON}" style="width:44px;height:44px"><div style="font-weight:800;font-size:22px;letter-spacing:-.02em">${BRAND}</div></div>
+  <div class="abs" style="left:28px;top:96px;font-weight:800;font-size:${T(30, 29)}px;line-height:1.2;letter-spacing:-.03em;white-space:pre-line">${T('어느 사이트든\n방향키는 <span style="color:var(--violet)">똑같이.</span>', 'Same keys.\n<span style="color:var(--violet)">Every</span> video site.')}</div>
+  <div class="abs" style="left:28px;bottom:26px;display:flex;gap:8px">${['left', 'up', 'down', 'right'].map((d) => key(arrow(d, 20, 4.5), 50, 50, d === 'right' ? 'on' : '')).join('')}${key('space', 112, 50, '', 12)}</div>
+  <div class="abs" style="right:26px;top:30px">${seal(40)}</div>
+</div>`;
+
+document.getElementById('root').innerHTML = slides[S]();
+document.body.className = 'lang-' + L;
+</script>
+</body>
+</html>
